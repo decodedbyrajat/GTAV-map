@@ -229,7 +229,7 @@ function boot() {
     }),
     zIndexOffset: 9000
   }).addTo(map);
-  map.on('click', e => setWP(e.latlng, null, true));
+  map.on('click', e => setWP(e.latlng, null, false));
   map.on('moveend', loadPOIs);
   // User dragging the map turns off follow
   map.on('dragstart', () => { if (follow) { follow = false; updLocBtn(); } });
@@ -441,7 +441,7 @@ function buildPoiPopup(nm, t, street, lat, lon) {
   const btn = document.createElement('button');
   btn.className = 'pop-wp-btn';
   btn.textContent = 'SET WAYPOINT ✚';
-  btn.addEventListener('click', () => { setWP(L.latLng(lat, lon), nm, true); map.closePopup(); });
+  btn.addEventListener('click', () => { setWP(L.latLng(lat, lon), nm, false); startNav(); map.closePopup(); });
   wrap.appendChild(btn);
   return wrap;
 }
@@ -512,11 +512,19 @@ function pickR(i) {
   if (!x) return;
   const name = x.display_name.split(',')[0];
   const ll = L.latLng(parseFloat(x.lat), parseFloat(x.lon));
-  follow = false; updLocBtn();
-  setWP(ll, name, true);           // sets waypoint, draws route, fits both in view
+  setWP(ll, name, false);          // sets waypoint + draws route (no fit)
+  startNav();                      // zoom in close & follow, like turn-by-turn
   document.getElementById('srch').value = name;
   document.getElementById('srch').blur();
   hideR();
+}
+// Enter close-up turn-by-turn style navigation view on the player
+function startNav() {
+  follow = true;
+  if (canRotate) headingUp = true;
+  updLocBtn();
+  applyBearing();
+  map.flyTo(pLL, 17, { duration: 1.0 });
 }
 function hideR() { document.getElementById('sres').style.display = 'none'; }
 // ── UTILS ──────────────────────────────────────────────
