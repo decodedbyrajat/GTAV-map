@@ -2,8 +2,8 @@ const CACHE = 'navigator-v1';
 const TILE_CACHE = 'navigator-tiles-v1';
 // App shell files to cache immediately
 const SHELL = [
-  '/',
-  '/index.html',
+  '/GTAV-map/',
+  '/GTAV-map/index.html',
   'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'

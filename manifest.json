@@ -2,7 +2,7 @@
   "name": "NAVIGATOR — Winnipeg",
   "short_name": "NAVIGATOR",
   "description": "GTA V style GPS map for Winnipeg",
-  "start_url": "/",
+  "start_url": "/GTAV-map/",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#0a0806",
